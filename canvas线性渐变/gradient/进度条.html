@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            background-color: #c2c2c2;
+        }
+        #canvas{
+            display: block;
+            width: 300px;
+            margin: 100px auto;
+        }
+    </style>
+    <script>
+        window.onload= function(){
+            var canvas = document.querySelector("canvas");
+            var cxt = canvas.getContext("2d");
+            var w = canvas.width;
+            var h = canvas.height;
+            var degrees = 0;
+            var color = "skyblue";
+            var text;
+            var animationLoop,redrawLoop;
+            function init(){
+                cxt.clearRect(0,0,w,h);
+                cxt.beginPath();
+                cxt.strokeStyle = "purple";
+                cxt.lineWidth = 30;
+                cxt.arc(w/2,h/2,100,0,Math.PI*2,false);
+                cxt.stroke();
+                //Math.PI=180du
+                var radians=degrees*Math.PI/180;
+                cxt.beginPath();
+                cxt.strokeStyle=color;
+                cxt.lineWidth=30;
+                cxt.arc(w/2,h/2,100,Math.PI/360,radians-Math.PI/180,false);//整个圆是2PI
+                cxt.stroke();
+                cxt.fillStyle = color;
+                cxt.font="50px bebas";
+                text=Math.floor(degrees/360*100)+"%";
+                textWidth=cxt.measureText(text).width;
+                cxt.fillText(text,w/2-textWidth/2,h/2+15);
+            }
+            function draw()
+            {
+                if(typeof animationloop!=undefined)
+                    clearInterval(animationLoop);
+                new_degrees=Math.round(Math.random()*360);
+                var diff=new_degrees-degrees;
+                animationloop=setInterval(animateTo,1000/diff);
+            }
+//animation for fun调用animation函数
+            function animateTo()
+            {
+                if(degrees<new_degrees)
+                    degrees++;
+
+                if(degrees==new_degrees)
+                    clearInterval(animationLoop);
+                init();
+            }
+            draw();
+            redraw_loop=setInterval(draw,1000);
+
+        }
+    </script>
+</head>
+<body>
+<canvas id="canvas" width="300" height="300"></canvas>
+</body>
+</html>

@@ -1,0 +1,151 @@
+
+//单行注释
+/*
+多行注释
+*/
+/*
+//声明变量
+@background:"red";
+
+@offsetX:33;
+
+//可以运算
+@offsetX:@offsetX+10;
+
+//以函数的方式 封装样式
+.backgroundSetting(@color,@shawColor,@width,@height){
+  background-color: @color;
+  box-shadow: @shawColor 0 3;
+  width:@width;
+  height: @height;
+}
+
+//封装样式类
+.color {
+  color:aqua;
+  opacity: 0.8;
+}
+
+.some {
+  color: #1960c8;
+}
+.other {
+  //类似继承
+  //同时 设置 .some 和 .other 的颜色为 #1960c8
+  &:extend(.some);
+}
+
+.setColor(@width:300)when(@width<500){
+  color: blue;
+}
+
+a {
+  text-decoration: none;
+
+  //负选择符   & 就表示 a
+  &:hover {
+    color: brown;
+  }
+}
+
+//类似switch
+.button {
+  &-ok {
+    color: #007aff;
+  }
+  &-cancel {
+    color: #ff1849;
+  }
+  &-custom {
+    color: #8654ff;
+  }
+}
+
+
+//可以使用dom 方式 嵌套选择器
+.swiper-container {
+  .swoper-wrapper {
+    .swiper-slide {
+      .background-view {
+
+        //混合使用样式
+        .color;
+
+        //background-color: @background;
+        //如果上面给了参数的话 这里就不同写参数了，直接一个括号就行
+        .backgroundSetting("red","gray",100%,600px);
+      }
+    }
+  }
+}
+*/
+
+
+* {
+  margin: 0;
+  padding: 0;
+}
+.position(@type:absolute,@left:0,@top:0,@right:0,@bottom:0) {
+  position: @type;
+  left: @left;
+  right: @right;
+  top: @top;
+  bottom: @bottom;
+}
+.setBackground(@color:"red",@width:100px,@height:100px){
+  background-color: @color;
+  width: @width;
+  height: @height;
+}
+.fz {
+  margin-left:30px ;
+  margin-top: 90px;
+
+}
+.fr {
+ position: absolute;
+  top: 180px;
+  right: 0;
+}
+.font {
+  position: absolute;
+  top: 80px;
+  left:100px;
+}
+.flight {
+  position: absolute;
+  bottom: 150px;
+  left: 15px;
+}
+.music {
+  position: absolute;
+  top: 10px;
+  right: 0;
+}
+.up {
+  position: absolute;
+  bottom:0;
+  left: 45%;
+}
+
+
+//可以使用dom 方式 嵌套选择器
+.swiper-container {
+  .swiper-wrapper {
+    .swiper-slide {
+      .background-view, .background-view2 {
+        position:relative;
+        .setBackground(#3e88f1,400px,667px);
+        .bottom-image{
+          .position(absolute,0,"","");
+        }
+        .cloud-image {
+          .setBackground("",375px,667px);
+          .position(absolute,0,0,"","");
+        }
+
+
+      }
+    }
+  }
+}
